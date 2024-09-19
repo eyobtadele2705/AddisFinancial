@@ -8,34 +8,45 @@ spring:
     contexts: crdb
     enabled: true
 
-  datasource:
-    url: jdbc:postgresql://localhost:26257/lottery_app_db?sslmode=verify-full&sslrootcert=src/main/certs/ca.crt
-    driver-class-name: org.postgresql.Driver
-    username: eyob
-    password: eyob@1234
-    hikari:
-      connection-test-query: SELECT 1
-      maximum-pool-size: 50
-      minimum-idle: 20
+  # datasource:
+  #   url: jdbc:postgresql://localhost:26257/lottery_app_db?sslmode=verify-full&sslrootcert=src/main/certs/ca.crt
+  #   driver-class-name: org.postgresql.Driver
+  #   username: eyob
+  #   password: eyob@1234
+  #   hikari:
+  #     connection-test-query: SELECT 1
+  #     maximum-pool-size: 50
+  #     minimum-idle: 20
+
+  # jpa:
+  #   open-in-view: false
+  #   properties:
+  #     hibernate:
+  #       dialect: org.hibernate.dialect.PostgreSQLDialect
+  #   show-sql: false
+  #  datasource:
+  #    url: jdbc:postgresql://localhost:5432/lottery-app-db
+  #    username: keycloak_user
+  #    password: keycloak@1234
+  #    driver-class-name: org.postgresql.Driver
+  #  jpa:
+  #    hibernate:
+  #      ddl-auto: update
+  #    show-sql: false
+  #    properties:
+  #      hibernate:
+  #        format_sql: true
 
   jpa:
-    open-in-view: false
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: false
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/lottery-app-db
-#    username: keycloak_user
-#    password: keycloak@1234
-#    driver-class-name: org.postgresql.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    show-sql: false
-#    properties:
-#      hibernate:
-#        format_sql: true
+  datasource:
+    url: jdbc:postgresql://ep-white-leaf-66290301.us-east-2.aws.neon.tech/lottery_db_app
+    username: eyobtadele2705
+    password: AZGydo02WNlF
 
   security:
     oauth2:
@@ -65,12 +76,10 @@ app:
   keycloak:
     admin:
       clientId: admin-cli
-      clientSecret: m4llMdA7js87E2AIS3YCApCJaHRWmlrK
-    realm: Lottery-App
+      clientSecret: baghc5OoQLEKS2087YIukeotDoPTdZsv
+    realm: Addis Financial
     serverUrl: http://localhost:9082
 
 application:
   mailing:
     activation-url: http://localhost:1810/
-
-
