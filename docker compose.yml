@@ -1,0 +1,56 @@
+
+# WARNING!! WORKING CORRECTLY DO NOT MODIFY ANYTHING FROM HERE
+
+services:
+
+  postgres:
+    container_name: postgres-keycloak-con
+    image: postgres
+    environment:
+      POSTGRES_DB: keycloak_db
+      POSTGRES_USER: keycloak_user
+      POSTGRES_PASSWORD: keycloak@1234
+    #   PGDATA: /var/lib/postgresql/data
+    # volumes:
+    #   - postgres:/data/postgres
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - spring-demo
+    restart: unless-stopped
+  
+  keycloak:
+    container_name: keycloak-container
+    image: quay.io/keycloak/keycloak:25.0.0
+    command: start-dev
+    restart: unless-stopped
+    # links:
+    #   - postgres
+    depends_on:
+      - postgres
+    ports:
+      - "9082:8080"
+    environment:
+      KEYCLOAK_ADMIN : admin
+      KEYCLOAK_ADMIN_PASSWORD: admin@1234
+      KC_DB: postgres
+      KC_DB_SCHEMA: public
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: keycloak@1234
+      KC_DB_URL: jdbc:postgresql://postgres-keycloak-con:5432/keycloak_db
+      KC_HOSTNAME: localhost
+      KC_FEATURES: token-exchange,admin-fine-grained-authz
+#      KC_HTTP_RELATIVE_PATH: /keycloak
+    networks:
+      - spring-demo
+
+networks:
+  spring-demo:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- Note: Context names match Spring profile names -->
+
+    <changeSet id="1" author="root" context="crdb">
+        <validCheckSum>ANY</validCheckSum>
+        <sqlFile path="db/create.sql"/>
+    </changeSet>
+
+    <changeSet id="2" author="eyob" context="crdb">
+        <insert tableName="_roles">
+            <column name="id">1</column>
+            <column name="role_name">ADMIN</column>
+            <column name="description">Role Admin</column>
+        </insert>
+        <insert tableName="_roles">
+            <column name="id">2</column>
+            <column name="role_name">USER</column>
+            <column name="description">Role User</column>
+        </insert>
+
+    </changeSet>
+
+
+    <changeSet id="3" author="eyob" context="crdb">
+        <insert tableName="coupon">
+            <column name="coupon_number">12345</column>
+            <column name="available_coupons">10</column>
+            <column name="coupon_value">15</column>
+            <column name="coupon_type">"WEEKLY"</column>
+        </insert>
+        <insert tableName="coupon">
+            <column name="coupon_number">54321</column>
+            <column name="available_coupons">50</column>
+            <column name="coupon_value">150</column>
+            <column name="coupon_type">"QUARTERLY"</column>
+        </insert>
+        <insert tableName="coupon">
+            <column name="coupon_number">67890</column>
+            <column name="available_coupons">5</column>
+            <column name="coupon_value">10</column>
+            <column name="coupon_type">"WEEKLY"</column>
+        </insert>
+        <insert tableName="coupon">
+            <column name="coupon_number">98765</column>
+            <column name="available_coupons">100</column>
+            <column name="coupon_value">200</column>
+            <column name="coupon_type">"QUARTERLY"</column>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
